@@ -772,18 +772,26 @@
     }
 
     .avatar {
-      width: 54px;
-      height: 54px;
-      border-radius: 12px;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--display);
       font-weight: 600;
-      font-size: 18px;
+      font-size: 32px;
       color: #fff;
-      letter-spacing: .02em
+      letter-spacing: .02em;
+      background: var(--line-2);
+      overflow: hidden
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
     }
 
     .spk .top {
@@ -1005,17 +1013,25 @@
     }
 
     .org .av {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--display);
       font-weight: 600;
-      font-size: 15px;
+      font-size: 28px;
       color: #fff;
-      margin-bottom: 13px
+      margin-bottom: 13px;
+      background: var(--line-2);
+      overflow: hidden
+    }
+
+    .org .av img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover
     }
 
     .org .nm {
@@ -1567,7 +1583,7 @@
 
       <div class="spk-grid">
         <div class="spk reveal">
-          <div class="avatar" style="background:#2E5BD7">BL</div>
+          <div class="avatar" style="background:#2E5BD7"><img src="img/speaker_boyi_li.jpg" alt="Boyi Li"></div>
           <div>
             <div class="top">
               <h3>Boyi Li</h3><span class="status confirmed">Confirmed</span>
@@ -1579,7 +1595,8 @@
           </div>
         </div>
         <div class="spk reveal">
-          <div class="avatar" style="background:#1FA9C7">MP</div>
+          <div class="avatar" style="background:#1FA9C7"><img src="img/speaker_marco_pavone.jpg" alt="Marco Pavone">
+          </div>
           <div>
             <div class="top">
               <h3>Marco Pavone</h3><span class="status confirmed">Confirmed</span>
@@ -1591,7 +1608,8 @@
           </div>
         </div>
         <div class="spk reveal">
-          <div class="avatar" style="background:#E2702E">SS</div>
+          <div class="avatar" style="background:#E2702E"><img src="img/speaker_stefan_schaal.jpg" alt="Stefan Schaal">
+          </div>
           <div>
             <div class="top">
               <h3>Stefan Schaal</h3><span class="status invited">Invited</span>
@@ -1602,7 +1620,8 @@
           </div>
         </div>
         <div class="spk reveal">
-          <div class="avatar" style="background:#2FB36B">GN</div>
+          <div class="avatar" style="background:#2FB36B"><img src="img/speaker_gerhard_neumann.jpg"
+              alt="Gerhard Neumann"></div>
           <div>
             <div class="top">
               <h3>Gerhard Neumann</h3><span class="status invited">Invited</span>
@@ -1743,31 +1762,31 @@
       </div>
       <div class="org-grid">
         <div class="org reveal">
-          <div class="av" style="background:#2E5BD7">AK</div>
+          <div class="av" style="background:#2E5BD7"><img src="img/org_ayoung_kim.jpg" alt="Ayoung Kim"></div>
           <div class="nm">Ayoung Kim</div>
           <div class="af">Seoul National University</div>
           <a class="em" href="mailto:ayoungk@snu.ac.kr">ayoungk@snu.ac.kr</a>
         </div>
         <div class="org reveal">
-          <div class="av" style="background:#1FA9C7">OT</div>
+          <div class="av" style="background:#1FA9C7"><img src="img/org_omer_sahin_tas.jpg" alt="Omer Sahin Tas"></div>
           <div class="nm">Omer Sahin Tas</div>
           <div class="af">FZI and KIT Karlsruhe</div>
           <a class="em" href="mailto:tas@fzi.de">tas@fzi.de</a>
         </div>
         <div class="org reveal">
-          <div class="av" style="background:#2FB36B">MS</div>
+          <div class="av" style="background:#2FB36B"><img src="img/org_marlon_steiner.jpg" alt="Marlon Steiner"></div>
           <div class="nm">Marlon Steiner</div>
           <div class="af">KIT Karlsruhe</div>
           <a class="em" href="mailto:marlon.steiner@kit.edu">marlon.steiner@kit.edu</a>
         </div>
         <div class="org reveal">
-          <div class="av" style="background:#E2702E">SK</div>
+          <div class="av" style="background:#E2702E"><img src="img/org_shiho_kim.jpg" alt="Shiho Kim"></div>
           <div class="nm">Shiho Kim</div>
           <div class="af">Yonsei University</div>
           <a class="em" href="mailto:shiho@yonsei.ac.kr">shiho@yonsei.ac.kr</a>
         </div>
         <div class="org reveal">
-          <div class="av" style="background:#6A3FB5">YN</div>
+          <div class="av" style="background:#6A3FB5"><img src="img/org_yagiz_nalcakan.jpg" alt="Yagiz Nalcakan"></div>
           <div class="nm">Yagiz Nalcakan</div>
           <div class="af">Yonsei University</div>
           <a class="em" href="mailto:ynalcakan@yonsei.ac.kr">ynalcakan@yonsei.ac.kr</a>
