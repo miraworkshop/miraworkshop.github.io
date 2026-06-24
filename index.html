@@ -1,855 +1,1884 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MIRA 2026 · 3rd Workshop on Multimodal Intelligence for Reasoning and Autonomy @ CoRL 2026</title>
-<meta name="description" content="MIRA 2026, the 3rd Workshop on Multimodal Intelligence for Reasoning and Autonomy, at CoRL 2026 in Austin, TX. How should autonomous systems combine heterogeneous sensing and representation to reason and act reliably in the open world?">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#F6F7F9;
-    --card:#FFFFFF;
-    --ink:#13171E;
-    --ink-soft:#39424F;
-    --muted:#69727E;
-    --faint:#98A0AC;
-    --line:#E4E8ED;
-    --line-2:#D2D8E0;
-    --accent:#2350C9;
-    --accent-soft:#EAF0FE;
-    --thermal:#D9682E;
-    --maxw:1120px;
-    --display:"Space Grotesk",-apple-system,system-ui,sans-serif;
-    --body:"Hanken Grotesk",-apple-system,system-ui,sans-serif;
-    --mono:"JetBrains Mono",ui-monospace,monospace;
-    --spectrum:linear-gradient(90deg,#6A3FB5 0%,#2E5BD7 17%,#1FA9C7 33%,#2FB36B 50%,#E4B23C 66%,#E2702E 80%,#C23A36 91%,#6E2230 100%);
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MIRA 2026 · 3rd Workshop on Multimodal Intelligence for Reasoning and Autonomy @ CoRL 2026</title>
+  <meta name="description"
+    content="MIRA 2026, the 3rd Workshop on Multimodal Intelligence for Reasoning and Autonomy, at CoRL 2026 in Austin, TX. How should autonomous systems combine heterogeneous sensing and representation to reason and act reliably in the open world?">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --paper: #F6F7F9;
+      --card: #FFFFFF;
+      --ink: #13171E;
+      --ink-soft: #39424F;
+      --muted: #69727E;
+      --faint: #98A0AC;
+      --line: #E4E8ED;
+      --line-2: #D2D8E0;
+      --accent: #2350C9;
+      --accent-soft: #EAF0FE;
+      --thermal: #D9682E;
+      --maxw: 1120px;
+      --display: "Space Grotesk", -apple-system, system-ui, sans-serif;
+      --body: "Hanken Grotesk", -apple-system, system-ui, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, monospace;
+      --spectrum: linear-gradient(90deg, #6A3FB5 0%, #2E5BD7 17%, #1FA9C7 33%, #2FB36B 50%, #E4B23C 66%, #E2702E 80%, #C23A36 91%, #6E2230 100%);
+    }
 
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-  body{
-    background:var(--paper);
-    color:var(--ink);
-    font-family:var(--body);
-    font-size:16.5px;
-    line-height:1.62;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+    html {
+      scroll-behavior: smooth
+    }
 
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+    @media (prefers-reduced-motion:reduce) {
+      html {
+        scroll-behavior: auto
+      }
+    }
 
-  .eyebrow{
-    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:10px;
-  }
-  .eyebrow::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--spectrum)}
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 16.5px;
+      line-height: 1.62;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-  h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,3.6vw,38px);line-height:1.08;letter-spacing:-.015em}
-  h3{font-family:var(--display);font-weight:600;letter-spacing:-.01em}
-  p{color:var(--ink-soft)}
+    a {
+      color: inherit;
+      text-decoration: none
+    }
 
-  .spectrum-bar{height:5px;border-radius:3px;background:var(--spectrum)}
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px
+    }
 
-  /* ---------------- nav ---------------- */
-  header.nav{position:sticky;top:0;z-index:60;background:rgba(246,247,249,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;gap:22px}
-  .brand{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
-  .brand .mark{width:24px;height:8px;border-radius:2px;background:var(--spectrum)}
-  .nav-links{display:flex;gap:2px;margin-left:auto;align-items:center}
-  .nav-links a{font-size:13.5px;color:var(--muted);padding:7px 11px;border-radius:7px;transition:color .18s,background .18s}
-  .nav-links a:hover{color:var(--ink);background:var(--card)}
-  .nav-links a.active{color:var(--accent)}
-  .nav-cta{font-family:var(--mono);font-size:12px;letter-spacing:.03em;background:var(--accent);color:#fff;padding:8px 14px;border-radius:8px;margin-left:8px;transition:background .18s}
-  .nav-cta:hover{background:#1a40a8}
-  .menu-btn{display:none;margin-left:auto;background:var(--card);border:1px solid var(--line-2);color:var(--ink);width:40px;height:38px;border-radius:8px;cursor:pointer;font-size:17px}
-  @media(max-width:900px){
-    .nav-links{position:absolute;top:60px;left:0;right:0;flex-direction:column;align-items:stretch;gap:2px;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px 16px;display:none}
-    .nav-links.open{display:flex}
-    .nav-links a{padding:11px 12px;font-size:15px}
-    .nav-cta{margin:6px 0 0;text-align:center}
-    .menu-btn{display:block}
-  }
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px
+    }
 
-  /* ---------------- hero ---------------- */
-  .hero{position:relative;padding:54px 0 64px;overflow:hidden;border-bottom:1px solid var(--line)}
-  .hero-grid{position:absolute;inset:0;z-index:0;opacity:.6;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:48px 48px;
-    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 78% 0%,#000,transparent 70%);
-    mask-image:radial-gradient(ellipse 80% 70% at 78% 0%,#000,transparent 70%);}
-  .hero .wrap{position:relative;z-index:2}
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-  .corl-lockup{display:flex;align-items:center;gap:14px;margin-bottom:30px}
-  .corl-logo{height:46px;min-width:118px;border:1px dashed var(--line-2);border-radius:9px;background:var(--card);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px 12px}
-  .corl-logo img{max-height:34px;max-width:150px;display:block}
-  .corl-ph{display:none;font-family:var(--mono);font-size:12px;color:var(--faint);letter-spacing:.06em;text-align:center;line-height:1.25}
-  .corl-text{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+    .eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--spectrum)
+    }
 
-  .hero-name{font-family:var(--display);font-weight:700;font-size:clamp(56px,11vw,118px);line-height:.9;letter-spacing:-.04em;color:var(--ink)}
-  .hero-full{font-family:var(--display);font-weight:500;font-size:clamp(17px,2.6vw,26px);letter-spacing:-.01em;color:var(--ink-soft);margin:16px 0 0;max-width:24ch}
-  .hero-spec{width:min(420px,70%);margin:22px 0 0}
-  .hero-thesis{font-size:clamp(16px,1.9vw,18.5px);color:var(--ink-soft);max-width:64ch;margin:26px 0 0;line-height:1.55}
+    h2 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: clamp(26px, 3.6vw, 38px);
+      line-height: 1.08;
+      letter-spacing: -.015em
+    }
 
-  .hero-cta{margin-top:32px}
-  .btn{font-family:var(--mono);font-size:13px;letter-spacing:.02em;padding:13px 24px;border-radius:9px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;border:1px solid transparent;transition:transform .12s,background .18s}
-  .btn:active{transform:translateY(1px)}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-primary:hover{background:#1a40a8}
-  .btn .arr{transition:transform .18s}
-  .btn:hover .arr{transform:translateX(3px)}
+    h3 {
+      font-family: var(--display);
+      font-weight: 600;
+      letter-spacing: -.01em
+    }
 
-  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:52px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .fact{background:var(--card);padding:18px 20px}
-  .fact .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-  .fact .v{font-family:var(--display);font-weight:600;font-size:18px;margin-top:7px;letter-spacing:-.01em;color:var(--ink)}
-  .fact .s{font-size:13px;color:var(--muted);margin-top:2px}
-  @media(max-width:720px){.facts{grid-template-columns:repeat(2,1fr)}}
+    p {
+      color: var(--ink-soft)
+    }
 
-  /* ---------------- sections ---------------- */
-  .section{padding:74px 0;border-top:1px solid var(--line)}
-  .section:first-of-type{border-top:none}
-  .sec-head{margin-bottom:36px}
-  .sec-head h2{margin-top:13px}
-  .sec-head .sub{color:var(--muted);max-width:66ch;margin-top:14px;font-size:16px}
+    .spectrum-bar {
+      height: 5px;
+      border-radius: 3px;
+      background: var(--spectrum)
+    }
 
-  .prose p{margin-bottom:18px;max-width:68ch}
-  .prose p:last-child{margin-bottom:0}
+    /* ---------------- nav ---------------- */
+    header.nav {
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      background: rgba(246, 247, 249, .86);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line)
+    }
 
-  /* workshop focus + figure */
-  .focus-fig{margin-top:40px;border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden}
-  .fig-cap{font-family:var(--mono);font-size:12px;color:var(--muted);padding:16px 22px;border-top:1px solid var(--line);letter-spacing:.02em;line-height:1.6}
-  .fig-cap .fc-num{color:var(--ink);font-weight:500}
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      gap: 22px
+    }
 
-  .matrix-scroll{overflow-x:auto}
-  table.bets{border-collapse:collapse;width:100%;min-width:680px}
-  table.bets th,table.bets td{text-align:center;padding:0}
-  table.bets thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:18px 6px 14px;border-bottom:1px solid var(--line);vertical-align:bottom;transition:color .18s,background .18s}
-  table.bets thead th.corner{text-align:left;padding-left:24px;color:var(--ink-soft)}
-  table.bets tbody th{font-family:var(--display);font-weight:600;font-size:14.5px;text-align:left;padding:15px 14px 15px 24px;color:var(--ink);white-space:nowrap;border-bottom:1px solid var(--line);transition:color .18s}
-  table.bets tbody tr:last-child th,table.bets tbody tr:last-child td{border-bottom:none}
-  table.bets td{border-bottom:1px solid var(--line);transition:background .18s}
-  .bet i{display:inline-block;border-radius:50%;transition:transform .18s}
-  .bet.p i{width:13px;height:13px;background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
-  .bet.s i{width:11px;height:11px;background:transparent;border:2px solid var(--ink-soft)}
-  .bet.r i{width:6px;height:6px;background:var(--faint)}
-  .bet.n i{width:4px;height:4px;background:var(--line-2)}
-  table.bets th.colhi,table.bets td.colhi{background:var(--accent-soft)}
-  table.bets th.colhi{color:var(--accent)}
-  table.bets td.colhi .bet.p i{transform:scale(1.12)}
-  .legend{display:flex;gap:22px;flex-wrap:wrap;padding:15px 24px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.02em}
-  .legend span{display:inline-flex;align-items:center;gap:8px}
-  .lg{display:inline-block;border-radius:50%}
-  .lg.p{width:12px;height:12px;background:var(--accent)}
-  .lg.s{width:11px;height:11px;border:2px solid var(--ink-soft)}
-  .lg.r{width:6px;height:6px;background:var(--faint)}
+    .brand {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: .01em;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
 
-  /* challenge callout */
-  .challenge{margin-top:40px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;background:var(--card);padding:30px 32px;display:grid;grid-template-columns:1fr 200px;gap:30px;align-items:center}
-  @media(max-width:720px){.challenge{grid-template-columns:1fr;gap:22px}}
-  .challenge .label{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
-  .challenge h3{font-size:21px;margin:8px 0 12px}
-  .challenge p{font-size:15px;max-width:62ch}
-  .challenge .stat{text-align:center;border-left:1px solid var(--line);padding-left:30px}
-  @media(max-width:720px){.challenge .stat{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:22px;text-align:left}}
-  .challenge .stat .n{font-family:var(--display);font-weight:700;font-size:46px;line-height:1;color:var(--accent);letter-spacing:-.03em}
-  .challenge .stat .l{font-size:12.5px;color:var(--muted);margin-top:8px}
+    .brand .mark {
+      width: 24px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--spectrum)
+    }
 
-  /* questions + announcements split */
-  .split{display:grid;grid-template-columns:1fr 332px;gap:46px;align-items:start}
-  @media(max-width:920px){.split{grid-template-columns:1fr;gap:42px}}
-  .q-item{border-top:1px solid var(--line);padding:22px 0;display:grid;grid-template-columns:46px 1fr;gap:8px}
-  .q-item:first-child{border-top:none;padding-top:0}
-  .q-num{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500}
-  .q-item h3{font-size:18.5px;margin-bottom:7px;letter-spacing:-.01em}
-  .q-item p{font-size:15px;color:var(--muted);max-width:60ch}
-  .tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:34px}
-  .tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;color:var(--ink-soft);background:var(--card);border:1px solid var(--line-2);border-radius:20px;padding:6px 13px}
+    .nav-links {
+      display: flex;
+      gap: 2px;
+      margin-left: auto;
+      align-items: center
+    }
 
-  .ann{position:sticky;top:80px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
-  .ann-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
-  .ann-head .t{font-family:var(--display);font-weight:600;font-size:16px}
-  .ann-head .live{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--thermal);display:inline-flex;align-items:center;gap:6px}
-  .ann-head .live i{width:7px;height:7px;border-radius:50%;background:var(--thermal)}
-  .ann-item{padding:15px 20px;border-bottom:1px solid var(--line)}
-  .ann-item:last-child{border-bottom:none}
-  .ann-item .d{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.04em}
-  .ann-item .m{font-size:14px;color:var(--ink-soft);margin-top:5px;line-height:1.45}
-  .ann-item .m a{color:var(--accent)}
+    .nav-links a {
+      font-size: 13.5px;
+      color: var(--muted);
+      padding: 7px 11px;
+      border-radius: 7px;
+      transition: color .18s, background .18s
+    }
 
-  /* call for papers */
-  .cfp-lead{max-width:70ch;margin-bottom:32px}
-  .cfp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media(max-width:860px){.cfp-grid{grid-template-columns:1fr}}
-  .cfp-card{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--card)}
-  .cfp-card .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
-  .cfp-card h3{font-size:17px;margin:11px 0 12px}
-  .cfp-card dl{font-size:14px}
-  .cfp-card .pair{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line)}
-  .cfp-card .pair:last-child{border-bottom:none}
-  .cfp-card dt{color:var(--muted)}
-  .cfp-card dd{font-family:var(--mono);font-size:12.5px;color:var(--ink);text-align:right}
-  .tba{color:var(--thermal)}
-  .cfp-note{font-size:14px;color:var(--muted);margin-top:24px;max-width:76ch}
+    .nav-links a:hover {
+      color: var(--ink);
+      background: var(--card)
+    }
 
-  /* speakers */
-  .spk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-  @media(max-width:760px){.spk-grid{grid-template-columns:1fr}}
-  .spk{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--card);display:flex;gap:18px;align-items:flex-start;transition:border-color .18s,transform .18s}
-  .spk:hover{border-color:var(--line-2);transform:translateY(-2px)}
-  .avatar{width:54px;height:54px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:18px;color:#fff;letter-spacing:.02em}
-  .spk .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .spk h3{font-size:19px}
-  .spk .aff{font-family:var(--mono);font-size:12px;color:var(--accent);margin:3px 0 9px}
-  .spk p{font-size:14px;color:var(--muted);line-height:1.5}
-  .status{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid var(--line-2);color:var(--muted)}
-  .status.confirmed{color:#1f8a55;border-color:#bfe6cf}
-  .status.invited{color:var(--thermal);border-color:#f0cdb6}
-  .spk.reserved{grid-column:1 / -1;border-style:dashed;background:transparent}
-  .spk.reserved .avatar{background:var(--paper)!important;color:var(--muted);border:1px dashed var(--line-2)}
+    .nav-links a.active {
+      color: var(--accent)
+    }
 
-  /* accepted papers */
-  .papers-empty{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:40px 32px;text-align:center}
-  .papers-empty .ic{width:46px;height:46px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:inline-flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
-  .papers-empty h3{font-size:18px;margin-bottom:8px}
-  .papers-empty p{font-size:14.5px;color:var(--muted);max-width:54ch;margin:0 auto}
+    .nav-links a.nav-cta,
+    .nav-links a.nav-cta.active {
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .03em;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      margin-left: 8px;
+      transition: background .18s
+    }
 
-  /* program */
-  .prog{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
-  .prog-row{display:grid;grid-template-columns:148px 1fr;border-bottom:1px solid var(--line)}
-  .prog-row:last-child{border-bottom:none}
-  .prog-row .t{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding:15px 20px;border-right:1px solid var(--line);white-space:nowrap}
-  .prog-row .d{padding:15px 20px}
-  .prog-row .d .n{font-weight:600;color:var(--ink);font-size:15px}
-  .prog-row .d .x{font-size:13.5px;color:var(--muted);margin-top:2px}
-  .prog-row.key{background:#fbfcff}
-  .prog-row.brk .n,.prog-row.panel .n{color:var(--accent)}
-  @media(max-width:600px){.prog-row{grid-template-columns:104px 1fr}.prog-row .t{padding:13px 12px;font-size:11.5px}}
-  .fmt-notes{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:24px}
-  @media(max-width:700px){.fmt-notes{grid-template-columns:1fr}}
-  .fmt{border:1px solid var(--line);border-radius:12px;padding:18px 20px;background:var(--card)}
-  .fmt h4{font-family:var(--display);font-weight:600;font-size:15px;margin-bottom:5px}
-  .fmt p{font-size:13.5px;color:var(--muted);line-height:1.5}
+    .nav-links a.nav-cta:hover {
+      background: #1a40a8;
+      color: #fff
+    }
 
-  /* organizers */
-  .org-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-  @media(max-width:980px){.org-grid{grid-template-columns:repeat(3,1fr)}}
-  @media(max-width:620px){.org-grid{grid-template-columns:repeat(2,1fr)}}
-  .org{border:1px solid var(--line);border-radius:12px;padding:20px;background:var(--card);transition:border-color .18s}
-  .org:hover{border-color:var(--line-2)}
-  .org .av{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:15px;color:#fff;margin-bottom:13px}
-  .org .nm{font-family:var(--display);font-weight:600;font-size:15.5px;letter-spacing:-.01em}
-  .org .af{font-size:12.5px;color:var(--muted);margin:5px 0 11px;line-height:1.4}
-  .org .em{font-family:var(--mono);font-size:11px;color:var(--accent);word-break:break-all;transition:color .18s}
-  .org .em:hover{color:var(--thermal)}
+    .menu-btn {
+      display: none;
+      margin-left: auto;
+      background: var(--card);
+      border: 1px solid var(--line-2);
+      color: var(--ink);
+      width: 40px;
+      height: 38px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 17px
+    }
 
-  /* acknowledgements */
-  .ack-note{color:var(--muted);max-width:64ch;margin-bottom:28px;font-size:15.5px}
-  .ack-grid{display:flex;flex-wrap:wrap;gap:16px}
-  .ack-logo{border:1px solid var(--line);border-radius:12px;background:var(--card);min-width:170px;height:84px;flex:1;display:flex;align-items:center;justify-content:center;padding:14px 22px;text-align:center;font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink-soft);transition:border-color .18s}
-  .ack-logo:hover{border-color:var(--line-2)}
-  .ack-logo span{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--faint);font-weight:400;margin-top:5px;text-transform:uppercase}
+    @media(max-width:900px) {
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        background: var(--card);
+        border-bottom: 1px solid var(--line);
+        padding: 10px 16px 16px;
+        display: none
+      }
 
-  /* footer */
-  footer{border-top:1px solid var(--line);background:var(--card);padding:50px 0 56px;margin-top:6px}
-  .foot-grid{display:flex;justify-content:space-between;gap:34px;flex-wrap:wrap;align-items:flex-start}
-  .foot-brand{font-family:var(--display);font-weight:700;font-size:24px;display:flex;align-items:center;gap:11px}
-  .foot-brand .mark{width:26px;height:8px;border-radius:2px;background:var(--spectrum)}
-  .foot-tag{color:var(--muted);font-size:14px;margin-top:12px;max-width:40ch}
-  .foot-col h5{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
-  .foot-col a,.foot-col .li{display:block;color:var(--ink-soft);font-size:14px;margin-bottom:9px;transition:color .18s}
-  .foot-col a:hover{color:var(--accent)}
-  .foot-meta{font-family:var(--mono);font-size:11px;color:var(--faint);margin-top:42px;letter-spacing:.03em;border-top:1px solid var(--line);padding-top:22px}
+      .nav-links.open {
+        display: flex
+      }
 
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-  ::selection{background:var(--accent);color:#fff}
-</style>
+      .nav-links a {
+        padding: 11px 12px;
+        font-size: 15px
+      }
+
+      .nav-cta {
+        margin: 6px 0 0;
+        text-align: center
+      }
+
+      .menu-btn {
+        display: block
+      }
+    }
+
+    /* ---------------- hero ---------------- */
+    .hero {
+      position: relative;
+      padding: 54px 0 64px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: .6;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 78% 0%, #000, transparent 70%);
+      mask-image: radial-gradient(ellipse 80% 70% at 78% 0%, #000, transparent 70%);
+    }
+
+    .hero .wrap {
+      position: relative;
+      z-index: 2
+    }
+
+    .corl-lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 30px
+    }
+
+    .corl-logo {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .corl-logo img {
+      max-height: 48px;
+      max-width: 200px;
+      display: block
+    }
+
+    .corl-ph {
+      display: none;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--faint);
+      letter-spacing: .06em;
+      text-align: center;
+      line-height: 1.25
+    }
+
+    .corl-text {
+      font-family: var(--mono);
+      font-size: 15px;
+      color: var(--muted);
+      letter-spacing: .04em
+    }
+
+    .hero-name {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(56px, 11vw, 118px);
+      line-height: .9;
+      letter-spacing: -.04em;
+      color: var(--ink)
+    }
+
+    .hero-full {
+      font-family: var(--display);
+      font-weight: 500;
+      font-size: clamp(17px, 2.6vw, 26px);
+      letter-spacing: -.01em;
+      color: var(--ink-soft);
+      margin: 16px 0 0
+    }
+
+    .hero-spec {
+      width: min(420px, 70%);
+      margin: 22px 0 0
+    }
+
+    .hero-thesis {
+      font-size: clamp(16px, 1.9vw, 18.5px);
+      color: var(--ink-soft);
+      max-width: 64ch;
+      margin: 26px 0 0;
+      line-height: 1.55
+    }
+
+    .hero-cta {
+      margin-top: 32px
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: .02em;
+      padding: 13px 24px;
+      border-radius: 9px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid transparent;
+      transition: transform .12s, background .18s
+    }
+
+    .btn:active {
+      transform: translateY(1px)
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .btn-primary:hover {
+      background: #1a40a8
+    }
+
+    .btn .arr {
+      transition: transform .18s
+    }
+
+    .btn:hover .arr {
+      transform: translateX(3px)
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 52px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden
+    }
+
+    .fact {
+      background: var(--card);
+      padding: 18px 20px
+    }
+
+    .fact .k {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--faint)
+    }
+
+    .fact .v {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 18px;
+      margin-top: 7px;
+      letter-spacing: -.01em;
+      color: var(--ink)
+    }
+
+    .fact .s {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 2px
+    }
+
+    @media(max-width:720px) {
+      .facts {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    /* ---------------- sections ---------------- */
+    .section {
+      padding: 74px 0;
+      border-top: 1px solid var(--line)
+    }
+
+    .section:first-of-type {
+      border-top: none
+    }
+
+    .sec-head {
+      margin-bottom: 36px
+    }
+
+    .sec-head h2 {
+      margin-top: 13px
+    }
+
+    .sec-head .sub {
+      color: var(--muted);
+      max-width: 66ch;
+      margin-top: 14px;
+      font-size: 16px
+    }
+
+    .prose p {
+      margin-bottom: 18px;
+      max-width: 68ch
+    }
+
+    .prose p:last-child {
+      margin-bottom: 0
+    }
+
+    #focus .prose p {
+      max-width: none;
+    }
+
+
+
+
+    /* challenge callout */
+    .challenge {
+      margin-top: 40px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      border-radius: 14px;
+      background: var(--card);
+      padding: 30px 32px;
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      gap: 30px;
+      align-items: center
+    }
+
+    @media(max-width:720px) {
+      .challenge {
+        grid-template-columns: 1fr;
+        gap: 22px
+      }
+    }
+
+    .challenge .label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent)
+    }
+
+    .challenge h3 {
+      font-size: 21px;
+      margin: 8px 0 12px
+    }
+
+    .challenge p {
+      font-size: 15px;
+      max-width: 62ch
+    }
+
+    .challenge .stat {
+      text-align: center;
+      border-left: 1px solid var(--line);
+      padding-left: 30px
+    }
+
+    @media(max-width:720px) {
+      .challenge .stat {
+        border-left: none;
+        border-top: 1px solid var(--line);
+        padding-left: 0;
+        padding-top: 22px;
+        text-align: left
+      }
+    }
+
+    .challenge .stat .n {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 46px;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -.03em
+    }
+
+    .challenge .stat .l {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 8px
+    }
+
+    /* questions + announcements split */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 332px;
+      gap: 46px;
+      align-items: start
+    }
+
+    @media(max-width:920px) {
+      .split {
+        grid-template-columns: 1fr;
+        gap: 42px
+      }
+    }
+
+    .q-item {
+      border-top: 1px solid var(--line);
+      padding: 22px 0;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 8px
+    }
+
+    .q-item:first-child {
+      border-top: none;
+      padding-top: 0
+    }
+
+    .q-num {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--accent);
+      font-weight: 500
+    }
+
+    .q-item h3 {
+      font-size: 18.5px;
+      margin-bottom: 7px;
+      letter-spacing: -.01em
+    }
+
+    .q-item p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 60ch
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 34px
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      letter-spacing: .02em;
+      color: var(--ink-soft);
+      background: var(--card);
+      border: 1px solid var(--line-2);
+      border-radius: 20px;
+      padding: 6px 13px
+    }
+
+    .ann {
+      position: sticky;
+      top: 80px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      overflow: hidden
+    }
+
+    .ann-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .ann-head .t {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 16px
+    }
+
+    .ann-head .live {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--thermal);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .ann-head .live i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--thermal)
+    }
+
+    .ann-item {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .ann-item:last-child {
+      border-bottom: none
+    }
+
+    .ann-item .d {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--faint);
+      letter-spacing: .04em
+    }
+
+    .ann-item .m {
+      font-size: 14px;
+      color: var(--ink-soft);
+      margin-top: 5px;
+      line-height: 1.45
+    }
+
+    .ann-item .m a {
+      color: var(--accent)
+    }
+
+    /* call for papers */
+    .cfp-lead {
+      max-width: 70ch;
+      margin-bottom: 32px
+    }
+
+    .cfp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px
+    }
+
+    @media(max-width:860px) {
+      .cfp-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .cfp-card {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px;
+      background: var(--card)
+    }
+
+    .cfp-card .lab {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--faint)
+    }
+
+    .cfp-card h3 {
+      font-size: 17px;
+      margin: 11px 0 12px
+    }
+
+    .cfp-card dl {
+      font-size: 14px
+    }
+
+    .cfp-card .pair {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .cfp-card .pair:last-child {
+      border-bottom: none
+    }
+
+    .cfp-card dt {
+      color: var(--muted)
+    }
+
+    .cfp-card dd {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--ink);
+      text-align: right
+    }
+
+    .tba {
+      color: var(--thermal)
+    }
+
+    .cfp-note {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 24px;
+      max-width: 76ch
+    }
+
+    /* speakers */
+    .spk-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px
+    }
+
+    @media(max-width:760px) {
+      .spk-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .spk {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 22px;
+      background: var(--card);
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: border-color .18s, transform .18s
+    }
+
+    .spk:hover {
+      border-color: var(--line-2);
+      transform: translateY(-2px)
+    }
+
+    .avatar {
+      width: 54px;
+      height: 54px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 18px;
+      color: #fff;
+      letter-spacing: .02em
+    }
+
+    .spk .top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .spk h3 {
+      font-size: 19px
+    }
+
+    .spk .aff {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      margin: 3px 0 9px
+    }
+
+    .spk p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    .status {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 5px;
+      border: 1px solid var(--line-2);
+      color: var(--muted)
+    }
+
+    .status.confirmed {
+      color: #1f8a55;
+      border-color: #bfe6cf
+    }
+
+    .status.invited {
+      color: var(--thermal);
+      border-color: #f0cdb6
+    }
+
+    .spk.reserved {
+      grid-column: 1 / -1;
+      border-style: dashed;
+      background: transparent
+    }
+
+    .spk.reserved .avatar {
+      background: var(--paper) !important;
+      color: var(--muted);
+      border: 1px dashed var(--line-2)
+    }
+
+    /* accepted papers */
+    .papers-empty {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      padding: 40px 32px;
+      text-align: center
+    }
+
+    .papers-empty .ic {
+      width: 46px;
+      height: 46px;
+      border-radius: 11px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px
+    }
+
+    .papers-empty h3 {
+      font-size: 18px;
+      margin-bottom: 8px
+    }
+
+    .papers-empty p {
+      font-size: 14.5px;
+      color: var(--muted);
+      max-width: 54ch;
+      margin: 0 auto
+    }
+
+    /* program */
+    .prog {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--card)
+    }
+
+    .prog-row {
+      display: grid;
+      grid-template-columns: 148px 1fr;
+      border-bottom: 1px solid var(--line)
+    }
+
+    .prog-row:last-child {
+      border-bottom: none
+    }
+
+    .prog-row .t {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--muted);
+      padding: 15px 20px;
+      border-right: 1px solid var(--line);
+      white-space: nowrap
+    }
+
+    .prog-row .d {
+      padding: 15px 20px
+    }
+
+    .prog-row .d .n {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 15px
+    }
+
+    .prog-row .d .x {
+      font-size: 13.5px;
+      color: var(--muted);
+      margin-top: 2px
+    }
+
+    .prog-row.key {
+      background: #fbfcff
+    }
+
+    .prog-row.brk .n,
+    .prog-row.panel .n {
+      color: var(--accent)
+    }
+
+    @media(max-width:600px) {
+      .prog-row {
+        grid-template-columns: 104px 1fr
+      }
+
+      .prog-row .t {
+        padding: 13px 12px;
+        font-size: 11.5px
+      }
+    }
+
+    .fmt-notes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 24px
+    }
+
+    @media(max-width:700px) {
+      .fmt-notes {
+        grid-template-columns: 1fr
+      }
+    }
+
+    .fmt {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px 20px;
+      background: var(--card)
+    }
+
+    .fmt h4 {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 5px
+    }
+
+    .fmt p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.5
+    }
+
+    /* organizers */
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px
+    }
+
+    @media(max-width:980px) {
+      .org-grid {
+        grid-template-columns: repeat(3, 1fr)
+      }
+    }
+
+    @media(max-width:620px) {
+      .org-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    .org {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      background: var(--card);
+      transition: border-color .18s
+    }
+
+    .org:hover {
+      border-color: var(--line-2)
+    }
+
+    .org .av {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 13px
+    }
+
+    .org .nm {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 15.5px;
+      letter-spacing: -.01em
+    }
+
+    .org .af {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 5px 0 11px;
+      line-height: 1.4
+    }
+
+    .org .em {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      word-break: break-all;
+      transition: color .18s
+    }
+
+    .org .em:hover {
+      color: var(--thermal)
+    }
+
+    /* acknowledgements */
+    .ack-note {
+      color: var(--muted);
+      max-width: 64ch;
+      margin-bottom: 28px;
+      font-size: 15.5px
+    }
+
+    .ack-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px
+    }
+
+    .ack-logo {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--card);
+      min-width: 170px;
+      height: 84px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      text-align: center;
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink-soft);
+      transition: border-color .18s
+    }
+
+    .ack-logo:hover {
+      border-color: var(--line-2)
+    }
+
+    .ack-logo span {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .08em;
+      color: var(--faint);
+      font-weight: 400;
+      margin-top: 5px;
+      text-transform: uppercase
+    }
+
+    /* footer */
+    footer {
+      border-top: 1px solid var(--line);
+      background: var(--card);
+      padding: 50px 0 56px;
+      margin-top: 6px
+    }
+
+    .foot-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 34px;
+      flex-wrap: wrap;
+      align-items: flex-start
+    }
+
+    .foot-brand {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 11px
+    }
+
+    .foot-brand .mark {
+      width: 26px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--spectrum)
+    }
+
+    .foot-tag {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 12px;
+      max-width: 40ch
+    }
+
+    .foot-col h5 {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 12px
+    }
+
+    .foot-col a,
+    .foot-col .li {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 14px;
+      margin-bottom: 9px;
+      transition: color .18s
+    }
+
+    .foot-col a:hover {
+      color: var(--accent)
+    }
+
+    .foot-meta {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--faint);
+      margin-top: 42px;
+      letter-spacing: .03em;
+      border-top: 1px solid var(--line);
+      padding-top: 22px
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity .55s ease, transform .55s ease
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none
+      }
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- ===================== NAV ===================== -->
-<header class="nav">
-  <div class="nav-inner">
-    <a href="#top" class="brand"><span class="mark"></span>MIRA</a>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="#focus">Focus</a>
-      <a href="#questions">Questions</a>
-      <a href="#cfp">Call for papers</a>
-      <a href="#speakers">Speakers</a>
-      <a href="#papers">Accepted papers</a>
-      <a href="#program">Program</a>
-      <a href="#organizers">Organizers</a>
-      <a href="#cfp" class="nav-cta">Submit</a>
-    </nav>
-  </div>
-</header>
+  <!-- ===================== NAV ===================== -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="brand"><span class="mark"></span>MIRA</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#focus">Focus</a>
+        <a href="#questions">Questions</a>
+        <a href="#cfp">Call for papers</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#papers">Accepted papers</a>
+        <a href="#program">Program</a>
+        <a href="#organizers">Organizers</a>
+        <a href="#cfp" class="nav-cta">Submit</a>
+      </nav>
+    </div>
+  </header>
 
-<!-- ===================== HERO ===================== -->
-<main id="top" class="hero">
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="wrap">
+  <!-- ===================== HERO ===================== -->
+  <main id="top" class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="wrap">
 
-    <!-- Replace img/corl_logo.png with the official CoRL 2026 logo file.
+      <!-- Replace img/corl_logo.png with the official CoRL 2026 logo file.
          If the file is absent, the dashed placeholder is shown automatically. -->
-    <div class="corl-lockup">
-      <div class="corl-logo">
-        <img src="img/corl_logo.png" alt="CoRL 2026"
-             onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-        <span class="corl-ph">CoRL 2026<br>logo</span>
+      <div class="corl-lockup">
+        <div class="corl-logo">
+          <img src="img/corl_logo.png" alt="CoRL 2026"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+          <span class="corl-ph">CoRL 2026<br>logo</span>
+        </div>
+        <span class="corl-text">Workshop · Conference on Robot Learning 2026</span>
       </div>
-      <span class="corl-text">Workshop · Conference on Robot Learning 2026</span>
-    </div>
 
-    <h1 class="hero-name">MIRA</h1>
-    <p class="hero-full">Multimodal Intelligence for Reasoning and Autonomy</p>
-    <div class="hero-spec spectrum-bar" aria-hidden="true"></div>
+      <h1 class="hero-name">MIRA</h1>
+      <p class="hero-full">Multimodal Intelligence for Reasoning and Autonomy</p>
+      <div class="hero-spec spectrum-bar" aria-hidden="true"></div>
 
-    <p class="hero-thesis">
-      The third edition of MIRA broadens its scope from perception toward reasoning, examining how autonomous
-      systems should combine heterogeneous sensing and representation to reason and act reliably in the open world.
-      The program is structured to compare the competing design choices that different domains have adopted, and to
-      examine them directly rather than in isolation.
-    </p>
-
-    <div class="hero-cta">
-      <a href="#cfp" class="btn btn-primary">Submit to the workshop <span class="arr">&rarr;</span></a>
-    </div>
-
-    <div class="facts">
-      <div class="fact"><div class="k">Date</div><div class="v">09 Nov 2026</div><div class="s">CoRL workshop day</div></div>
-      <div class="fact"><div class="k">Venue</div><div class="v">Austin, TX</div><div class="s">JW Marriott · room TBA</div></div>
-      <div class="fact"><div class="k">Format</div><div class="v">Half day</div><div class="s">Keynotes · panel · posters</div></div>
-      <div class="fact"><div class="k">Challenge</div><div class="v">KITScenes</div><div class="s">LongTail benchmark</div></div>
-    </div>
-  </div>
-</main>
-
-<!-- ===================== WORKSHOP FOCUS ===================== -->
-<section class="section" id="focus">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Workshop focus</span>
-      <h2>Which modalities matter, and where reasoning should live</h2>
-      <p class="sub">A central tension in robot learning that the community has not resolved, framed around measurable failures rather than broad survey.</p>
-    </div>
-
-    <div class="prose reveal">
-      <p>
-        Large RGB-pretrained backbones now transfer across many tasks, and language has become a general interface
-        for reasoning and instruction. At the same time, deployments in driving, manipulation, and industrial
-        automation continue to rely on heterogeneous sensing that extends well beyond the visible spectrum,
-        including depth, LiDAR, radar, thermal and other non-visible bands, tactile sensing, and proprioception.
-      </p>
-      <p>
-        It remains unresolved which of these modalities are necessary, which become redundant as pretraining data
-        volumes grow, and how reasoning across them should be organized. These decisions are among the first that
-        any robot learning system makes, and they shape data collection, pretraining, transfer, robustness, and
-        cost. Different application domains have adopted markedly different solutions, and those solutions are
-        rarely examined side by side.
-      </p>
-      <p>
-        To confront these choices directly, the program brings together invited speakers spanning autonomous driving,
-        general robotics, and industrial automation. The workshop aims to surface where their assumptions agree,
-        where they diverge, and what a more domain-agnostic account of modality selection and cross-modal reasoning
-        might look like.
-      </p>
-    </div>
-
-    <!-- Position map figure -->
-    <figure class="focus-fig reveal">
-      <div class="matrix-scroll">
-        <table class="bets" id="betsTable">
-          <thead>
-            <tr>
-              <th class="corner">Domain ╲ Modality</th>
-              <th data-col="0">RGB</th><th data-col="1">Depth</th><th data-col="2">LiDAR</th><th data-col="3">Radar</th>
-              <th data-col="4">Thermal</th><th data-col="5">Tactile</th><th data-col="6">Proprio</th><th data-col="7">Language</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Autonomous driving</th>
-              <td data-col="0"><span class="bet p"><i></i></span></td><td data-col="1"><span class="bet s"><i></i></span></td>
-              <td data-col="2"><span class="bet p"><i></i></span></td><td data-col="3"><span class="bet p"><i></i></span></td>
-              <td data-col="4"><span class="bet s"><i></i></span></td><td data-col="5"><span class="bet n"><i></i></span></td>
-              <td data-col="6"><span class="bet s"><i></i></span></td><td data-col="7"><span class="bet s"><i></i></span></td>
-            </tr>
-            <tr>
-              <th>General robotics</th>
-              <td data-col="0"><span class="bet p"><i></i></span></td><td data-col="1"><span class="bet p"><i></i></span></td>
-              <td data-col="2"><span class="bet r"><i></i></span></td><td data-col="3"><span class="bet n"><i></i></span></td>
-              <td data-col="4"><span class="bet r"><i></i></span></td><td data-col="5"><span class="bet p"><i></i></span></td>
-              <td data-col="6"><span class="bet p"><i></i></span></td><td data-col="7"><span class="bet s"><i></i></span></td>
-            </tr>
-            <tr>
-              <th>Industrial automation</th>
-              <td data-col="0"><span class="bet p"><i></i></span></td><td data-col="1"><span class="bet s"><i></i></span></td>
-              <td data-col="2"><span class="bet s"><i></i></span></td><td data-col="3"><span class="bet r"><i></i></span></td>
-              <td data-col="4"><span class="bet s"><i></i></span></td><td data-col="5"><span class="bet s"><i></i></span></td>
-              <td data-col="6"><span class="bet p"><i></i></span></td><td data-col="7"><span class="bet r"><i></i></span></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="hero-cta">
+        <a href="#cfp" class="btn btn-primary">Submit to the workshop <span class="arr">&rarr;</span></a>
       </div>
-      <div class="legend">
-        <span><i class="lg p"></i> primary commitment</span>
-        <span><i class="lg s"></i> secondary</span>
-        <span><i class="lg r"></i> situational or rare</span>
-        <span style="color:var(--faint)">empty cell not commonly relied on</span>
-      </div>
-      <figcaption class="fig-cap">
-        <span class="fc-num">Figure 1.</span> Schematic position map of where each domain tends to commit its sensing and representation.
-        Presented during the opening session as a discussion device rather than an empirical claim. Hover a column
-        to trace one modality across all three domains.
-      </figcaption>
-    </figure>
 
-    <!-- Challenge callout -->
-    <div class="challenge reveal">
-      <div>
-        <span class="label">KITScenes LongTail Challenge</span>
-        <h3>The benchmark that grounds the discussion</h3>
+      <div class="facts">
+        <div class="fact">
+          <div class="k">Date</div>
+          <div class="v">09 Nov 2026</div>
+          <div class="s">CoRL workshop day</div>
+        </div>
+        <div class="fact">
+          <div class="k">Venue</div>
+          <div class="v">Austin, TX</div>
+          <div class="s">JW Marriott · room TBA</div>
+        </div>
+        <div class="fact">
+          <div class="k">Format</div>
+          <div class="v">Half day</div>
+          <div class="s">Keynotes · panel · posters</div>
+        </div>
+        <div class="fact">
+          <div class="k">Challenge</div>
+          <div class="v">KITScenes</div>
+          <div class="s">LongTail benchmark</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================== WORKSHOP FOCUS ===================== -->
+  <section class="section" id="focus">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Workshop focus</span>
+        <h2>Which modalities matter, and where reasoning should live</h2>
+      </div>
+
+      <div class="prose reveal">
         <p>
-          The challenge evaluates end-to-end driving models, including vision-language models and
-          vision-language-action models, in rare scenarios. It assesses whether multimodal models generalize from
-          limited examples while respecting high-level instructions, trajectory feasibility, and semantic coherence.
-          The challenge runs before the workshop, with submission, evaluation, and a public leaderboard administered
-          through a Hugging Face submission space. Participation is independent of paper acceptance, and winning teams
-          are invited to give short spotlight talks.
+          Large RGB-pretrained backbones now transfer across many tasks, and language has become a general interface
+          for reasoning and instruction. At the same time, deployments in driving, manipulation, and industrial
+          automation continue to rely on heterogeneous sensing that extends well beyond the visible spectrum,
+          including depth, LiDAR, radar, thermal and other non-visible bands, tactile sensing, and proprioception.
+        </p>
+        <p>
+          It remains unresolved which of these modalities are necessary, which become redundant as pretraining data
+          volumes grow, and how reasoning across them should be organized. These decisions are among the first that
+          any robot learning system makes, and they shape data collection, pretraining, transfer, robustness, and
+          cost. Different application domains have adopted markedly different solutions, and those solutions are
+          rarely examined side by side.
+        </p>
+        <p>
+          To confront these choices directly, the program brings together invited speakers spanning autonomous driving,
+          general robotics, and industrial automation. The workshop aims to surface where their assumptions agree,
+          where they diverge, and what a more domain-agnostic account of modality selection and cross-modal reasoning
+          might look like.
         </p>
       </div>
-      <div class="stat">
-        <div class="n">100+</div>
-        <div class="l">submissions to the few-shot version hosted at the CVPR Workshop on Autonomous Driving</div>
+
+
+
+      <!-- Challenge callout -->
+      <div class="challenge reveal">
+        <div>
+          <span class="label">KITScenes LongTail Challenge</span>
+          <h3>The benchmark that grounds the discussion</h3>
+          <p>
+            The challenge evaluates end-to-end driving models, including vision-language models and
+            vision-language-action models, in rare scenarios. It assesses whether multimodal models generalize from
+            limited examples while respecting high-level instructions, trajectory feasibility, and semantic coherence.
+            The challenge runs before the workshop, with submission, evaluation, and a public leaderboard administered
+            through a Hugging Face submission space. Participation is independent of paper acceptance, and winning teams
+            are invited to give short spotlight talks.
+          </p>
+        </div>
+        <div class="stat">
+          <div class="n">TBD</div>
+          <div class="l">Challenge website will be open soon.</div>
+
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== OPEN QUESTIONS + ANNOUNCEMENTS ===================== -->
-<section class="section" id="questions">
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <div class="sec-head reveal">
-          <span class="eyebrow">Open questions for the community</span>
-          <h2>Five contested questions</h2>
-          <p class="sub">The call for papers and the closing panel are tied to these. The KITScenes LongTail Challenge keeps the discussion grounded in measurable failures.</p>
-        </div>
+  <!-- ===================== OPEN QUESTIONS + ANNOUNCEMENTS ===================== -->
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <!-- ===================== OPEN QUESTIONS ===================== -->
+          <div id="questions">
+            <div class="sec-head reveal">
+              <span class="eyebrow">Open questions for the community</span>
+              <h2>Five contested questions</h2>
+              <p class="sub">The call for papers and the closing panel are tied to these. The KITScenes LongTail
+                Challenge
+                keeps the discussion grounded in measurable failures.</p>
+            </div>
 
-        <div class="reveal">
-          <div class="q-item">
-            <span class="q-num">Q1</span>
-            <div>
-              <h3>Modality sufficiency and redundancy</h3>
-              <p>When does adding a modality improve autonomy, and when does it become redundant once models are scaled and pretrained on dominant modalities? Is there a principled way to determine the minimal sufficient sensor and representation set for a target task and operating domain?</p>
+            <div class="reveal">
+              <div class="q-item">
+                <span class="q-num">Q1</span>
+                <div>
+                  <h3>Modality sufficiency and redundancy</h3>
+                  <p>When does adding a modality improve autonomy, and when does it become redundant once models are
+                    scaled and pretrained on dominant modalities? Is there a principled way to determine the minimal
+                    sufficient sensor and representation set for a target task and operating domain?</p>
+                </div>
+              </div>
+              <div class="q-item">
+                <span class="q-num">Q2</span>
+                <div>
+                  <h3>Where cross-modal reasoning should live</h3>
+                  <p>Should cross-modal reasoning operate through language as an explicit interlingua, through a shared
+                    learned latent space, or through modality-specific reasoning fused late? What does each choice cost
+                    in
+                    interpretability, data efficiency, and reliability?</p>
+                </div>
+              </div>
+              <div class="q-item">
+                <span class="q-num">Q3</span>
+                <div>
+                  <h3>Cross-domain transfer of modality recipes</h3>
+                  <p>Are the modality and reasoning requirements for autonomous driving fundamentally different from
+                    those
+                    for manipulation and industrial automation, or does a shared recipe transfer? Why do domains solving
+                    similar perception problems converge on different sensor stacks?</p>
+                </div>
+              </div>
+              <div class="q-item">
+                <span class="q-num">Q4</span>
+                <div>
+                  <h3>Robustness under degraded or missing modalities</h3>
+                  <p>How should a system reason when a modality is corrupted, miscalibrated, or absent at run time? Can
+                    multimodal models degrade gracefully rather than fail silently, and how should this be tested?</p>
+                </div>
+              </div>
+              <div class="q-item">
+                <span class="q-num">Q5</span>
+                <div>
+                  <h3>Evaluation beyond aggregate scores</h3>
+                  <p>How is the contribution of a single modality and the quality of multimodal reasoning measured
+                    beyond
+                    aggregate task scores? How far do criteria such as few-shot generalization, instruction following,
+                    semantic coherence, and trajectory quality transfer to manipulation, industrial automation, and
+                    robot
+                    learning more broadly?</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="tags reveal">
+              <span class="tag">Multimodal perception</span>
+              <span class="tag">Vision-language models</span>
+              <span class="tag">Vision-language-action</span>
+              <span class="tag">Foundation models</span>
+              <span class="tag">Beyond-visible sensing</span>
+              <span class="tag">LiDAR · radar · thermal</span>
+              <span class="tag">Tactile · proprioception</span>
+              <span class="tag">Sensor fusion</span>
+              <span class="tag">Long-tail reasoning</span>
+              <span class="tag">Robustness</span>
+              <span class="tag">Evaluation</span>
+              <span class="tag">End-to-end driving</span>
             </div>
           </div>
-          <div class="q-item">
-            <span class="q-num">Q2</span>
-            <div>
-              <h3>Where cross-modal reasoning should live</h3>
-              <p>Should cross-modal reasoning operate through language as an explicit interlingua, through a shared learned latent space, or through modality-specific reasoning fused late? What does each choice cost in interpretability, data efficiency, and reliability?</p>
+
+          <!-- Section Divider -->
+          <div class="section-divider" style="margin: 58px 0; border-top: 1px solid var(--line);"></div>
+
+          <!-- ===================== CALL FOR PAPERS ===================== -->
+          <div id="cfp">
+            <div class="sec-head reveal">
+              <span class="eyebrow">Call for papers</span>
+              <h2>Contributions that advance the open questions</h2>
+            </div>
+
+            <p class="cfp-lead prose reveal">
+              We invite contributions addressing the workshop's five open questions, including new, preliminary, and
+              in-progress work, position papers, and negative results. Short papers and extended abstracts are welcome,
+              keeping the barrier low for early-stage ideas. Review criteria favor relevance to the open questions,
+              originality, and potential to spark discussion over polish.
+            </p>
+
+            <div class="cfp-grid">
+              <div class="cfp-card reveal">
+                <span class="lab">Submission</span>
+                <h3>Format and venue</h3>
+                <dl>
+                  <div class="pair">
+                    <dt>Type</dt>
+                    <dd>Short paper / abstract</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Platform</dt>
+                    <dd>OpenReview</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Template</dt>
+                    <dd>CoRL 2026</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Anonymization</dt>
+                    <dd>Required</dd>
+                  </div>
+                </dl>
+              </div>
+              <div class="cfp-card reveal">
+                <span class="lab">Review</span>
+                <h3>Process</h3>
+                <dl>
+                  <div class="pair">
+                    <dt>Model</dt>
+                    <dd>Double-blind</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Reviews each</dt>
+                    <dd>2 to 3</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Rebuttal</dt>
+                    <dd>None</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Exclusion</dt>
+                    <dd>Accepted CoRL work</dd>
+                  </div>
+                </dl>
+              </div>
+              <div class="cfp-card reveal">
+                <span class="lab">Publication</span>
+                <h3>Outcome</h3>
+                <dl>
+                  <div class="pair">
+                    <dt>Presentation</dt>
+                    <dd>Poster</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Track</dt>
+                    <dd>Non-archival</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Special issue</dt>
+                    <dd>IEEE RA-L</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Spotlights</dt>
+                    <dd>Selected</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="cfp-grid" style="margin-top:18px">
+              <div class="cfp-card reveal" style="grid-column:1 / -1">
+                <span class="lab">Important dates</span>
+                <h3>Timeline</h3>
+                <dl style="columns:2;column-gap:40px">
+                  <div class="pair">
+                    <dt>Submission opens</dt>
+                    <dd class="tba">TBA</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Submission deadline</dt>
+                    <dd class="tba">TBA</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Author notification</dt>
+                    <dd class="tba">TBA</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Camera ready</dt>
+                    <dd class="tba">TBA</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Challenge results</dt>
+                    <dd class="tba">TBA</dd>
+                  </div>
+                  <div class="pair">
+                    <dt>Workshop date</dt>
+                    <dd>09 Nov 2026</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+
+            <p class="cfp-note">
+              Accepted papers and selected challenge entries are presented as posters throughout the workshop. If CoRL
+              opens
+              workshop proceedings, archival papers will be selected from the accepted set, and selected top papers will
+              be
+              invited to submit extended versions to the planned IEEE Robotics and Automation Letters Special Issue.
+            </p>
+          </div>
+        </div>
+
+        <!-- Announcements rail -->
+        <aside class="ann reveal" id="news" aria-label="Announcements">
+          <div class="ann-head">
+            <span class="t">Announcements</span>
+            <span class="live"><i></i>Live</span>
+          </div>
+          <!-- Edit these entries as the workshop timeline develops. -->
+          <div class="ann-item">
+            <div class="d">2026 · TBA</div>
+            <div class="m">Call for papers opens on <a href="#cfp">OpenReview</a>. Submission instructions to follow.
             </div>
           </div>
-          <div class="q-item">
-            <span class="q-num">Q3</span>
-            <div>
-              <h3>Cross-domain transfer of modality recipes</h3>
-              <p>Are the modality and reasoning requirements for autonomous driving fundamentally different from those for manipulation and industrial automation, or does a shared recipe transfer? Why do domains solving similar perception problems converge on different sensor stacks?</p>
-            </div>
+          <div class="ann-item">
+            <div class="d">2026 · TBA</div>
+            <div class="m">KITScenes LongTail Challenge launches with a public leaderboard on Hugging Face.</div>
           </div>
-          <div class="q-item">
-            <span class="q-num">Q4</span>
-            <div>
-              <h3>Robustness under degraded or missing modalities</h3>
-              <p>How should a system reason when a modality is corrupted, miscalibrated, or absent at run time? Can multimodal models degrade gracefully rather than fail silently, and how should this be tested?</p>
-            </div>
+          <div class="ann-item">
+            <div class="d">2026</div>
+            <div class="m">MIRA returns for its third edition, accepted as a workshop at CoRL 2026 in Austin, TX.</div>
           </div>
-          <div class="q-item">
-            <span class="q-num">Q5</span>
-            <div>
-              <h3>Evaluation beyond aggregate scores</h3>
-              <p>How is the contribution of a single modality and the quality of multimodal reasoning measured beyond aggregate task scores? How far do criteria such as few-shot generalization, instruction following, semantic coherence, and trajectory quality transfer to manipulation, industrial automation, and robot learning more broadly?</p>
+          <div class="ann-item">
+            <div class="d">Stay informed</div>
+            <div class="m">Deadlines, speaker confirmations, and challenge results are posted here as they are
+              confirmed.</div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INVITED SPEAKERS ===================== -->
+  <section class="section" id="speakers">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Invited speakers</span>
+        <h2>Anchoring three domains in one room</h2>
+        <p class="sub">Speakers are selected to span the communities under discussion, so the closing panel becomes a
+          structured argument across their assumptions rather than a sequence of talks.</p>
+      </div>
+
+      <div class="spk-grid">
+        <div class="spk reveal">
+          <div class="avatar" style="background:#2E5BD7">BL</div>
+          <div>
+            <div class="top">
+              <h3>Boyi Li</h3><span class="status confirmed">Confirmed</span>
             </div>
+            <div class="aff">NVIDIA Research</div>
+            <p>Work on efficient multimodality, data-efficient learning, and embodied intelligence connects
+              foundation-model and vision-language-action approaches to modality choice and reliable real-world robot
+              learning.</p>
           </div>
         </div>
-
-        <div class="tags reveal">
-          <span class="tag">Multimodal perception</span>
-          <span class="tag">Vision-language models</span>
-          <span class="tag">Vision-language-action</span>
-          <span class="tag">Foundation models</span>
-          <span class="tag">Beyond-visible sensing</span>
-          <span class="tag">LiDAR · radar · thermal</span>
-          <span class="tag">Tactile · proprioception</span>
-          <span class="tag">Sensor fusion</span>
-          <span class="tag">Long-tail reasoning</span>
-          <span class="tag">Robustness</span>
-          <span class="tag">Evaluation</span>
-          <span class="tag">End-to-end driving</span>
+        <div class="spk reveal">
+          <div class="avatar" style="background:#1FA9C7">MP</div>
+          <div>
+            <div class="top">
+              <h3>Marco Pavone</h3><span class="status confirmed">Confirmed</span>
+            </div>
+            <div class="aff">Stanford University</div>
+            <p>Recent work on Alpamayo and long-tail reasoning for autonomous driving links vision-language-action
+              models, structured reasoning traces, and safety-critical rare scenarios to reasoning under long-tail
+              conditions.</p>
+          </div>
         </div>
-      </div>
-
-      <!-- Announcements rail -->
-      <aside class="ann reveal" id="news" aria-label="Announcements">
-        <div class="ann-head">
-          <span class="t">Announcements</span>
-          <span class="live"><i></i>Live</span>
+        <div class="spk reveal">
+          <div class="avatar" style="background:#E2702E">SS</div>
+          <div>
+            <div class="top">
+              <h3>Stefan Schaal</h3><span class="status invited">Invited</span>
+            </div>
+            <div class="aff">University of Southern California</div>
+            <p>Decades of work in imitation learning, reinforcement learning, movement primitives, and perception-action
+              systems ground recent foundation-model approaches in motor control and closed-loop autonomy.</p>
+          </div>
         </div>
-        <!-- Edit these entries as the workshop timeline develops. -->
-        <div class="ann-item">
-          <div class="d">2026 · TBA</div>
-          <div class="m">Call for papers opens on <a href="#cfp">OpenReview</a>. Submission instructions to follow.</div>
+        <div class="spk reveal">
+          <div class="avatar" style="background:#2FB36B">GN</div>
+          <div>
+            <div class="top">
+              <h3>Gerhard Neumann</h3><span class="status invited">Invited</span>
+            </div>
+            <div class="aff">Karlsruhe Institute of Technology</div>
+            <p>Contributions to policy search, imitation learning, and movement primitives connect multimodal reasoning
+              to data-efficient policy learning, manipulation, and autonomous skill acquisition on real robots.</p>
+          </div>
         </div>
-        <div class="ann-item">
-          <div class="d">2026 · TBA</div>
-          <div class="m">KITScenes LongTail Challenge launches with a public leaderboard on Hugging Face.</div>
-        </div>
-        <div class="ann-item">
-          <div class="d">2026</div>
-          <div class="m">MIRA returns for its third edition, accepted as a workshop at CoRL 2026 in Austin, TX.</div>
-        </div>
-        <div class="ann-item">
-          <div class="d">Stay informed</div>
-          <div class="m">Deadlines, speaker confirmations, and challenge results are posted here as they are confirmed.</div>
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== CALL FOR PAPERS ===================== -->
-<section class="section" id="cfp">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Call for papers</span>
-      <h2>Contributions that advance the open questions</h2>
-    </div>
-
-    <p class="cfp-lead prose reveal">
-      We invite contributions addressing the workshop's five open questions, including new, preliminary, and
-      in-progress work, position papers, and negative results. Short papers and extended abstracts are welcome,
-      keeping the barrier low for early-stage ideas. Review criteria favor relevance to the open questions,
-      originality, and potential to spark discussion over polish.
-    </p>
-
-    <div class="cfp-grid">
-      <div class="cfp-card reveal">
-        <span class="lab">Submission</span>
-        <h3>Format and venue</h3>
-        <dl>
-          <div class="pair"><dt>Type</dt><dd>Short paper / abstract</dd></div>
-          <div class="pair"><dt>Platform</dt><dd>OpenReview</dd></div>
-          <div class="pair"><dt>Template</dt><dd>CoRL 2026</dd></div>
-          <div class="pair"><dt>Anonymization</dt><dd>Required</dd></div>
-        </dl>
-      </div>
-      <div class="cfp-card reveal">
-        <span class="lab">Review</span>
-        <h3>Process</h3>
-        <dl>
-          <div class="pair"><dt>Model</dt><dd>Double-blind</dd></div>
-          <div class="pair"><dt>Reviews each</dt><dd>2 to 3</dd></div>
-          <div class="pair"><dt>Rebuttal</dt><dd>None</dd></div>
-          <div class="pair"><dt>Exclusion</dt><dd>Accepted CoRL work</dd></div>
-        </dl>
-      </div>
-      <div class="cfp-card reveal">
-        <span class="lab">Publication</span>
-        <h3>Outcome</h3>
-        <dl>
-          <div class="pair"><dt>Presentation</dt><dd>Poster</dd></div>
-          <div class="pair"><dt>Track</dt><dd>Non-archival</dd></div>
-          <div class="pair"><dt>Special issue</dt><dd>IEEE RA-L</dd></div>
-          <div class="pair"><dt>Spotlights</dt><dd>Selected</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <div class="cfp-grid" style="margin-top:18px">
-      <div class="cfp-card reveal" style="grid-column:1 / -1">
-        <span class="lab">Important dates</span>
-        <h3>Timeline</h3>
-        <dl style="columns:2;column-gap:40px">
-          <div class="pair"><dt>Submission opens</dt><dd class="tba">TBA</dd></div>
-          <div class="pair"><dt>Submission deadline</dt><dd class="tba">TBA</dd></div>
-          <div class="pair"><dt>Author notification</dt><dd class="tba">TBA</dd></div>
-          <div class="pair"><dt>Camera ready</dt><dd class="tba">TBA</dd></div>
-          <div class="pair"><dt>Challenge results</dt><dd class="tba">TBA</dd></div>
-          <div class="pair"><dt>Workshop date</dt><dd>09 Nov 2026</dd></div>
-        </dl>
-      </div>
-    </div>
-
-    <p class="cfp-note">
-      Accepted papers and selected challenge entries are presented as posters throughout the workshop. If CoRL opens
-      workshop proceedings, archival papers will be selected from the accepted set, and selected top papers will be
-      invited to submit extended versions to the planned IEEE Robotics and Automation Letters Special Issue.
-    </p>
-  </div>
-</section>
-
-<!-- ===================== INVITED SPEAKERS ===================== -->
-<section class="section" id="speakers">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Invited speakers</span>
-      <h2>Anchoring three domains in one room</h2>
-      <p class="sub">Speakers are selected to span the communities under discussion, so the closing panel becomes a structured argument across their assumptions rather than a sequence of talks.</p>
-    </div>
-
-    <div class="spk-grid">
-      <div class="spk reveal">
-        <div class="avatar" style="background:#2E5BD7">BL</div>
-        <div>
-          <div class="top"><h3>Boyi Li</h3><span class="status confirmed">Confirmed</span></div>
-          <div class="aff">NVIDIA Research</div>
-          <p>Work on efficient multimodality, data-efficient learning, and embodied intelligence connects foundation-model and vision-language-action approaches to modality choice and reliable real-world robot learning.</p>
-        </div>
-      </div>
-      <div class="spk reveal">
-        <div class="avatar" style="background:#1FA9C7">MP</div>
-        <div>
-          <div class="top"><h3>Marco Pavone</h3><span class="status confirmed">Confirmed</span></div>
-          <div class="aff">Stanford University</div>
-          <p>Recent work on Alpamayo and long-tail reasoning for autonomous driving links vision-language-action models, structured reasoning traces, and safety-critical rare scenarios to reasoning under long-tail conditions.</p>
-        </div>
-      </div>
-      <div class="spk reveal">
-        <div class="avatar" style="background:#E2702E">SS</div>
-        <div>
-          <div class="top"><h3>Stefan Schaal</h3><span class="status invited">Invited</span></div>
-          <div class="aff">University of Southern California</div>
-          <p>Decades of work in imitation learning, reinforcement learning, movement primitives, and perception-action systems ground recent foundation-model approaches in motor control and closed-loop autonomy.</p>
-        </div>
-      </div>
-      <div class="spk reveal">
-        <div class="avatar" style="background:#2FB36B">GN</div>
-        <div>
-          <div class="top"><h3>Gerhard Neumann</h3><span class="status invited">Invited</span></div>
-          <div class="aff">Karlsruhe Institute of Technology</div>
-          <p>Contributions to policy search, imitation learning, and movement primitives connect multimodal reasoning to data-efficient policy learning, manipulation, and autonomous skill acquisition on real robots.</p>
-        </div>
-      </div>
-      <div class="spk reserved reveal">
-        <div class="avatar">EC</div>
-        <div>
-          <div class="top"><h3>Early-career slot</h3><span class="status">Reserved</span></div>
-          <div class="aff">Advanced PhD student or postdoc</div>
-          <p>The fourth speaking slot is reserved for an early-career researcher who adds career-stage and gender diversity, broadens geographic and institutional coverage, and favors a less-represented modality or deployment domain, so the fourth voice widens the debate rather than echoing it.</p>
+        <div class="spk reserved reveal">
+          <div class="avatar">EC</div>
+          <div>
+            <div class="top">
+              <h3>Early-career slot</h3><span class="status">Reserved</span>
+            </div>
+            <div class="aff">Advanced PhD student or postdoc</div>
+            <p>The fourth speaking slot is reserved for an early-career researcher who adds career-stage and gender
+              diversity, broadens geographic and institutional coverage, and favors a less-represented modality or
+              deployment domain, so the fourth voice widens the debate rather than echoing it.</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== ACCEPTED PAPERS ===================== -->
-<section class="section" id="papers">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Accepted papers</span>
-      <h2>Selected contributions</h2>
-    </div>
-    <!-- After review, replace this empty state with the list of accepted papers,
+  <!-- ===================== ACCEPTED PAPERS ===================== -->
+  <section class="section" id="papers">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Accepted papers</span>
+        <h2>Selected contributions</h2>
+      </div>
+      <!-- After review, replace this empty state with the list of accepted papers,
          e.g. <a href="OpenReview-link">Paper title</a> with optional SPOTLIGHT / AWARD tags. -->
-    <div class="papers-empty reveal">
-      <span class="ic">&#9633;</span>
-      <h3>The list of accepted papers will appear here</h3>
-      <p>Following the double-blind review process, accepted papers and selected challenge entries will be listed here with links to OpenReview. Selected contributions will be invited to give spotlight talks.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== PROGRAM ===================== -->
-<section class="section" id="program">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Program</span>
-      <h2>A half-day built on argument</h2>
-      <p class="sub">Talks present positions rather than surveys. A disagreement wall gathers claims and questions throughout the morning, which the moderator groups into live fault lines for the closing panel.</p>
-    </div>
-
-    <div class="prog reveal">
-      <div class="prog-row"><div class="t">08:50 – 09:00</div><div class="d"><div class="n">Opening and challenge framing</div><div class="x">Position map and the five open questions</div></div></div>
-      <div class="prog-row key"><div class="t">09:00 – 09:30</div><div class="d"><div class="n">Keynote 1</div><div class="x">25 min position plus 5 min live questions</div></div></div>
-      <div class="prog-row key"><div class="t">09:30 – 10:00</div><div class="d"><div class="n">Keynote 2</div></div></div>
-      <div class="prog-row key"><div class="t">10:00 – 10:30</div><div class="d"><div class="n">Keynote 3</div></div></div>
-      <div class="prog-row brk"><div class="t">10:30 – 11:00</div><div class="d"><div class="n">Coffee break</div><div class="x">Disagreement wall and poster session active</div></div></div>
-      <div class="prog-row key"><div class="t">11:00 – 11:30</div><div class="d"><div class="n">Keynote 4</div><div class="x">Early-career speaker</div></div></div>
-      <div class="prog-row"><div class="t">11:30 – 11:35</div><div class="d"><div class="n">Challenge winners announcement</div></div></div>
-      <div class="prog-row"><div class="t">11:35 – 11:50</div><div class="d"><div class="n">Challenge spotlight talks</div><div class="x">3 × 5 min</div></div></div>
-      <div class="prog-row panel"><div class="t">11:50 – 12:30</div><div class="d"><div class="n">Panel session</div><div class="x">Audience-driven, built on the disagreement wall</div></div></div>
-    </div>
-
-    <div class="fmt-notes">
-      <div class="fmt reveal"><h4>Disagreement wall</h4><p>Attendees post claims, counterclaims, and questions for the panel, on the wall or online via QR, including from remote participants and during the talks.</p></div>
-      <div class="fmt reveal"><h4>Poster session</h4><p>Accepted papers and selected challenge entries are on display through the break. Each author posts one claim or open question onto the wall, tagged by the question it touches.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== ORGANIZERS ===================== -->
-<section class="section" id="organizers">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Organizers</span>
-      <h2>Organizing committee</h2>
-    </div>
-    <div class="org-grid">
-      <div class="org reveal">
-        <div class="av" style="background:#2E5BD7">AK</div>
-        <div class="nm">Ayoung Kim</div>
-        <div class="af">Seoul National University</div>
-        <a class="em" href="mailto:ayoungk@snu.ac.kr">ayoungk@snu.ac.kr</a>
-      </div>
-      <div class="org reveal">
-        <div class="av" style="background:#1FA9C7">OT</div>
-        <div class="nm">Omer Sahin Tas</div>
-        <div class="af">FZI and KIT Karlsruhe</div>
-        <a class="em" href="mailto:tas@fzi.de">tas@fzi.de</a>
-      </div>
-      <div class="org reveal">
-        <div class="av" style="background:#2FB36B">MS</div>
-        <div class="nm">Marlon Steiner</div>
-        <div class="af">KIT Karlsruhe</div>
-        <a class="em" href="mailto:marlon.steiner@kit.edu">marlon.steiner@kit.edu</a>
-      </div>
-      <div class="org reveal">
-        <div class="av" style="background:#E2702E">SK</div>
-        <div class="nm">Shiho Kim</div>
-        <div class="af">Yonsei University</div>
-        <a class="em" href="mailto:shiho@yonsei.ac.kr">shiho@yonsei.ac.kr</a>
-      </div>
-      <div class="org reveal">
-        <div class="av" style="background:#6A3FB5">YN</div>
-        <div class="nm">Yagiz Nalcakan</div>
-        <div class="af">Yonsei University</div>
-        <a class="em" href="mailto:ynalcakan@yonsei.ac.kr">ynalcakan@yonsei.ac.kr</a>
+      <div class="papers-empty reveal">
+        <span class="ic">&#9633;</span>
+        <h3>The list of accepted papers will appear here</h3>
+        <p>Following the double-blind review process, accepted papers and selected challenge entries will be listed here
+          with links to OpenReview. Selected contributions will be invited to give spotlight talks.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===================== ACKNOWLEDGEMENTS ===================== -->
-<section class="section" id="ack">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">Acknowledgements</span>
-      <h2>Hosting institutions and support</h2>
-    </div>
-    <p class="ack-note reveal">MIRA is organized with the support of the institutions of its organizing committee. Sponsorship and partnership inquiries are welcome through the organizers.</p>
-    <!-- Replace these text placeholders with sponsor / institution logo images as they are confirmed. -->
-    <div class="ack-grid reveal">
-      <div class="ack-logo">Yonsei University<span>Host</span></div>
-      <div class="ack-logo">Seoul National University<span>Co-host</span></div>
-      <div class="ack-logo">KIT Karlsruhe<span>Partner</span></div>
-      <div class="ack-logo">FZI Research Center<span>Partner</span></div>
-      <div class="ack-logo">Your logo here<span>Sponsor slot</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== FOOTER ===================== -->
-<footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-brand"><span class="mark"></span>MIRA</div>
-        <p class="foot-tag">3rd Workshop on Multimodal Intelligence for Reasoning and Autonomy, at the Conference on Robot Learning 2026.</p>
+  <!-- ===================== PROGRAM ===================== -->
+  <section class="section" id="program">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Program</span>
+        <h2>A half-day built on argument</h2>
+        <p class="sub">Talks present positions rather than surveys. A disagreement wall gathers claims and questions
+          throughout the morning, which the moderator groups into live fault lines for the closing panel.</p>
       </div>
-      <div class="foot-col">
-        <h5>Workshop</h5>
-        <a href="#focus">Workshop focus</a>
-        <a href="#cfp">Call for papers</a>
-        <a href="#program">Program</a>
-        <a href="#papers">Accepted papers</a>
+
+      <div class="prog reveal">
+        <div class="prog-row">
+          <div class="t">08:50 – 09:00</div>
+          <div class="d">
+            <div class="n">Opening and challenge framing</div>
+            <div class="x">Position map and the five open questions</div>
+          </div>
+        </div>
+        <div class="prog-row key">
+          <div class="t">09:00 – 09:30</div>
+          <div class="d">
+            <div class="n">Keynote 1</div>
+            <div class="x">25 min position plus 5 min live questions</div>
+          </div>
+        </div>
+        <div class="prog-row key">
+          <div class="t">09:30 – 10:00</div>
+          <div class="d">
+            <div class="n">Keynote 2</div>
+          </div>
+        </div>
+        <div class="prog-row key">
+          <div class="t">10:00 – 10:30</div>
+          <div class="d">
+            <div class="n">Keynote 3</div>
+          </div>
+        </div>
+        <div class="prog-row brk">
+          <div class="t">10:30 – 11:00</div>
+          <div class="d">
+            <div class="n">Coffee break</div>
+            <div class="x">Disagreement wall and poster session active</div>
+          </div>
+        </div>
+        <div class="prog-row key">
+          <div class="t">11:00 – 11:30</div>
+          <div class="d">
+            <div class="n">Keynote 4</div>
+            <div class="x">Early-career speaker</div>
+          </div>
+        </div>
+        <div class="prog-row">
+          <div class="t">11:30 – 11:35</div>
+          <div class="d">
+            <div class="n">Challenge winners announcement</div>
+          </div>
+        </div>
+        <div class="prog-row">
+          <div class="t">11:35 – 11:50</div>
+          <div class="d">
+            <div class="n">Challenge spotlight talks</div>
+            <div class="x">3 × 5 min</div>
+          </div>
+        </div>
+        <div class="prog-row panel">
+          <div class="t">11:50 – 12:30</div>
+          <div class="d">
+            <div class="n">Panel session</div>
+            <div class="x">Audience-driven, built on the disagreement wall</div>
+          </div>
+        </div>
       </div>
-      <div class="foot-col">
-        <h5>Links</h5>
-        <a href="https://miraworkshop.github.io">miraworkshop.github.io</a>
-        <a href="https://www.corl.org">CoRL 2026</a>
-        <a href="mailto:ynalcakan@yonsei.ac.kr">Contact organizers</a>
-      </div>
-      <div class="foot-col">
-        <h5>Contact</h5>
-        <span class="li">Yagiz Nalcakan</span>
-        <a href="mailto:ynalcakan@yonsei.ac.kr">ynalcakan@yonsei.ac.kr</a>
+
+      <div class="fmt-notes">
+        <div class="fmt reveal">
+          <h4>Disagreement wall</h4>
+          <p>Attendees post claims, counterclaims, and questions for the panel, on the wall or online via QR, including
+            from remote participants and during the talks.</p>
+        </div>
+        <div class="fmt reveal">
+          <h4>Poster session</h4>
+          <p>Accepted papers and selected challenge entries are on display through the break. Each author posts one
+            claim or open question onto the wall, tagged by the question it touches.</p>
+        </div>
       </div>
     </div>
-    <div class="foot-meta">
-      MIRA 2026 · Austin, TX · 09 Nov 2026 · KITScenes LongTail Challenge · Double-blind review on OpenReview · IEEE RA-L Special Issue target
+  </section>
+
+  <!-- ===================== ORGANIZERS ===================== -->
+  <section class="section" id="organizers">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Organizers</span>
+        <h2>Organizing committee</h2>
+      </div>
+      <div class="org-grid">
+        <div class="org reveal">
+          <div class="av" style="background:#2E5BD7">AK</div>
+          <div class="nm">Ayoung Kim</div>
+          <div class="af">Seoul National University</div>
+          <a class="em" href="mailto:ayoungk@snu.ac.kr">ayoungk@snu.ac.kr</a>
+        </div>
+        <div class="org reveal">
+          <div class="av" style="background:#1FA9C7">OT</div>
+          <div class="nm">Omer Sahin Tas</div>
+          <div class="af">FZI and KIT Karlsruhe</div>
+          <a class="em" href="mailto:tas@fzi.de">tas@fzi.de</a>
+        </div>
+        <div class="org reveal">
+          <div class="av" style="background:#2FB36B">MS</div>
+          <div class="nm">Marlon Steiner</div>
+          <div class="af">KIT Karlsruhe</div>
+          <a class="em" href="mailto:marlon.steiner@kit.edu">marlon.steiner@kit.edu</a>
+        </div>
+        <div class="org reveal">
+          <div class="av" style="background:#E2702E">SK</div>
+          <div class="nm">Shiho Kim</div>
+          <div class="af">Yonsei University</div>
+          <a class="em" href="mailto:shiho@yonsei.ac.kr">shiho@yonsei.ac.kr</a>
+        </div>
+        <div class="org reveal">
+          <div class="av" style="background:#6A3FB5">YN</div>
+          <div class="nm">Yagiz Nalcakan</div>
+          <div class="af">Yonsei University</div>
+          <a class="em" href="mailto:ynalcakan@yonsei.ac.kr">ynalcakan@yonsei.ac.kr</a>
+        </div>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script>
-(function(){
-  "use strict";
+  <!-- ===================== ACKNOWLEDGEMENTS ===================== -->
+  <section class="section" id="ack">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Acknowledgements</span>
+        <h2>Hosting institutions and support</h2>
+      </div>
+      <p class="ack-note reveal">MIRA is organized with the support of the institutions of its organizing committee.
+        Sponsorship and partnership inquiries are welcome through the organizers.</p>
+      <!-- Replace these text placeholders with sponsor / institution logo images as they are confirmed. -->
+      <div class="ack-grid reveal">
+        <div class="ack-logo">Yonsei University<span>Host</span></div>
+        <div class="ack-logo">Seoul National University<span>Co-host</span></div>
+        <div class="ack-logo">KIT Karlsruhe<span>Partner</span></div>
+        <div class="ack-logo">FZI Research Center<span>Partner</span></div>
+        <div class="ack-logo">Your logo here<span>Sponsor slot</span></div>
+      </div>
+    </div>
+  </section>
 
-  var menuBtn = document.getElementById('menuBtn');
-  var navLinks = document.getElementById('navLinks');
-  menuBtn.addEventListener('click', function(){
-    var open = navLinks.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  navLinks.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      navLinks.classList.remove('open');
-      menuBtn.setAttribute('aria-expanded','false');
-    });
-  });
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-brand"><span class="mark"></span>MIRA</div>
+          <p class="foot-tag">3rd Workshop on Multimodal Intelligence for Reasoning and Autonomy, at the Conference on
+            Robot Learning 2026.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Workshop</h5>
+          <a href="#focus">Workshop focus</a>
+          <a href="#cfp">Call for papers</a>
+          <a href="#program">Program</a>
+          <a href="#papers">Accepted papers</a>
+        </div>
+        <div class="foot-col">
+          <h5>Links</h5>
+          <a href="https://miraworkshop.github.io">miraworkshop.github.io</a>
+          <a href="https://www.corl.org">CoRL 2026</a>
+          <a href="mailto:ynalcakan@yonsei.ac.kr">Contact organizers</a>
+        </div>
+        <div class="foot-col">
+          <h5>Contact</h5>
+          <span class="li">Yagiz Nalcakan</span>
+          <a href="mailto:ynalcakan@yonsei.ac.kr">ynalcakan@yonsei.ac.kr</a>
+        </div>
+      </div>
+      <div class="foot-meta">
+        MIRA 2026
+      </div>
+    </div>
+  </footer>
 
-  /* position map column cross-highlight */
-  var table = document.getElementById('betsTable');
-  function setCol(col,on){
-    table.querySelectorAll('[data-col="'+col+'"]').forEach(function(el){ el.classList.toggle('colhi',on); });
-  }
-  table.querySelectorAll('[data-col]').forEach(function(el){
-    var col = el.getAttribute('data-col');
-    el.addEventListener('mouseenter', function(){ setCol(col,true); });
-    el.addEventListener('mouseleave', function(){ setCol(col,false); });
-  });
+  <script>
+    (function () {
+      "use strict";
 
-  /* reveal on scroll */
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var reveals = document.querySelectorAll('.reveal');
-  if(reduce || !('IntersectionObserver' in window)){
-    reveals.forEach(function(el){ el.classList.add('in'); });
-  } else {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {threshold:0.1, rootMargin:'0px 0px -8% 0px'});
-    reveals.forEach(function(el){ io.observe(el); });
-  }
+      var menuBtn = document.getElementById('menuBtn');
+      var navLinks = document.getElementById('navLinks');
+      menuBtn.addEventListener('click', function () {
+        var open = navLinks.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      navLinks.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
 
-  /* active nav link */
-  var ids = ['focus','questions','cfp','speakers','papers','program','organizers'];
-  var navMap = {};
-  document.querySelectorAll('.nav-links a').forEach(function(a){
-    var h = a.getAttribute('href');
-    if(h && h.indexOf('#')===0) navMap[h.slice(1)] = a;
-  });
-  var spy = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        Object.keys(navMap).forEach(function(k){ navMap[k].classList.remove('active'); });
-        if(navMap[e.target.id]) navMap[e.target.id].classList.add('active');
+
+
+      /* reveal on scroll */
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var reveals = document.querySelectorAll('.reveal');
+      if (reduce || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.1, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(function (el) { io.observe(el); });
       }
-    });
-  }, {rootMargin:'-45% 0px -50% 0px'});
-  ids.forEach(function(id){ var el=document.getElementById(id); if(el) spy.observe(el); });
-})();
-</script>
+
+      /* active nav link */
+      var ids = ['focus', 'questions', 'cfp', 'speakers', 'papers', 'program', 'organizers'];
+      var navMap = {};
+      document.querySelectorAll('.nav-links a').forEach(function (a) {
+        var h = a.getAttribute('href');
+        if (h && h.indexOf('#') === 0) navMap[h.slice(1)] = a;
+      });
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            Object.keys(navMap).forEach(function (k) { navMap[k].classList.remove('active'); });
+            if (navMap[e.target.id]) navMap[e.target.id].classList.add('active');
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      ids.forEach(function (id) { var el = document.getElementById(id); if (el) spy.observe(el); });
+    })();
+  </script>
 </body>
+
 </html>
